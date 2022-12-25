@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '30.0.3'
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi-v7a" , "arm64-v8a"
+        }
+
+        ndkVersion '21.3.6528147'
+        externalNativeBuild {
+            cmake {
+                abiFilters "arm64-v8a" // "armeabi-v7a", "arm64-v8a", "x86"
+                arguments "-DANDROID_TOOLCHAIN=clang"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            externalNativeBuild {
+                cmake {
+                    cppFlags "-DCMAKE_BUILD_TYPE=Release -std=c++11 -fPIC -Wall -Werror -Oz -fvisibility=hidden -fvisibility-inlines-hidden -ffunction-sections -fdata-sections"
+                }
+            }
+        }
+
+        debug {
+            jniDebuggable true
+            externalNativeBuild {
+                cmake {
+                    cppFlags "-DCMAKE_BUILD_TYPE=Debug -std=c++11 -fPIC -Wall -Werror -Oz -fvisibility=hidden -fvisibility-inlines-hidden -ffunction-sections -fdata-sections -g"
+                }
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}
