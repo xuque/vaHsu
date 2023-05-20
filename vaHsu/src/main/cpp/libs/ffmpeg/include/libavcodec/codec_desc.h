@@ -71,7 +71,7 @@ typedef struct AVCodecDescriptor {
  */
 #define AV_CODEC_PROP_INTRA_ONLY    (1 << 0)
 /**
- * Codec supports lossy compression. Audio and video codecs only.
+ * Codec supports lossy compression. Audio and video codecs only. 
  * @note a codec may support both lossy and lossless
  * compression modes
  */

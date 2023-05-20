@@ -10,4 +10,8 @@ public final class VaHsuTypes {
         public static final int VA_LOG_LEVEL_WARN  = 3;
         public static final int VA_LOG_LEVEL_ERROR = 4;
     }
+
+//    public static final class VaLoggerTag {
+//        public static String kTagVideoEncoder = "VideoEncoder";
+//    }
 }

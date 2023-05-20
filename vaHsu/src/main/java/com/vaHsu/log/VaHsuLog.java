@@ -11,7 +11,9 @@ public class VaHsuLog {
     private static VaHsuLog mInstance = null;
     public static VaHsuLog instance() {
         if (mInstance == null) {
-            mInstance = new VaHsuLog();
+            synchronized (VaHsuLog.class) {
+                mInstance = new VaHsuLog();
+            }
         }
         return mInstance;
     }
