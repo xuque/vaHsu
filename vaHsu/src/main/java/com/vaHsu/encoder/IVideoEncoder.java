@@ -70,13 +70,13 @@ public abstract class IVideoEncoder implements IVideoDataProvider, IVideoFrameCo
     }
 
     @Override
-    public int onDeliveryFrame(VaVideoFrame frame) {
-        return this.encodeFrame();
+    public void onDeliveryFrame(VaVideoFrame frame) {
+        this.encodeFrame(frame);
     }
 
-    public abstract int init();
+    public abstract int init(VideoEncoderConfig config);
 
     public abstract int deInit();
 
-    public abstract int encodeFrame();
+    public abstract void encodeFrame(VaVideoFrame frame);
 }

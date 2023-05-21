@@ -1,9 +1,16 @@
 package com.vaHsu;
 
+
+import android.content.Context;
+
+import com.vaHsu.capture.CaptureObserver;
+import com.vaHsu.capture.IVideoCapture;
+import com.vaHsu.capture.camera.VideoCaptureConfig;
+import com.vaHsu.capture.camera.camera1.Camera1Capture;
 import com.vaHsu.decoder.IVideoDecoder;
 import com.vaHsu.decoder.ffmpeg.FFmpegDecoder;
 
-public class VaHsuApi {
+public class VaHsuApi implements CaptureObserver {
     static {
 //        System.loadLibrary("avutil");
 //        System.loadLibrary("swresample");
@@ -32,4 +39,39 @@ public class VaHsuApi {
         return new FFmpegDecoder();
     }
 
+    public IVideoCapture createCapture(Context context) {
+        IVideoCapture capture = new Camera1Capture();
+        capture.initialize(context, this);
+        return capture;
+    }
+
+    @Override
+    public void onCameraOpenSuccess() {
+
+    }
+
+    @Override
+    public void onCameraStopped() {
+
+    }
+
+    @Override
+    public void onCameraError(String error) {
+
+    }
+
+    @Override
+    public void onCameraDisconnected() {
+
+    }
+
+    @Override
+    public void onCameraClosed() {
+
+    }
+
+    @Override
+    public void onFirstFrameAvailable() {
+
+    }
 }
